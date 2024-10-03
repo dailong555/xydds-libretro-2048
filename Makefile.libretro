@@ -343,12 +343,12 @@ else ifeq ($(platform), miyoo)
 	AR = /opt/miyoo/usr/bin/arm-linux-ar
 	CFLAGS += -fomit-frame-pointer -ffast-math -march=armv5te -mtune=arm926ej-s
 # XYDDS
-else ifeq ($(platform), miyoo)
+else ifeq ($(platform), xydds)
 	TARGET := $(TARGET_NAME)_libretro.so
 	fpic := -fPIC
 	SHARED := -shared -Wl,--no-undefined
-	CC = /opt/miyoo/usr/bin/arm-linux-gcc
-	AR = /opt/miyoo/usr/bin/arm-linux-ar
+	CC = /opt/xydds/usr/bin/arm-linux-gcc
+	AR = /opt/xydds/usr/bin/arm-linux-ar
 	CFLAGS += -fomit-frame-pointer -ffast-math -marm -mtune=cortex-a7 -mfpu=neon-vfpv4
 	ifeq ($(shell echo `$(CC) -dumpversion` "< 4.9" | bc -l), 1)
 	  CFLAGS += -march=armv7-a
