@@ -346,7 +346,7 @@ else ifeq ($(platform), miyoo)
 else ifeq ($(platform), xydds)
 	TARGET := $(TARGET_NAME)_libretro.so
 	fpic := -fPIC
-	SHARED := -shared -Wl,--no-undefined
+	SHARED := -shared -Wl,-version-script=link.T
 	CC = /opt/xydds/usr/bin/arm-linux-gcc
 	AR = /opt/xydds/usr/bin/arm-linux-ar
 	CFLAGS += -fomit-frame-pointer -ffast-math -marm -mtune=cortex-a7 -mfpu=neon-vfpv4
