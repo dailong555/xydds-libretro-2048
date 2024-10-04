@@ -346,10 +346,19 @@ else ifeq ($(platform), miyoo)
 else ifeq ($(platform), xydds)
 	TARGET := $(TARGET_NAME)_libretro.so
 	fpic := -fPIC
-	SHARED := -shared -Wl,-version-script=link.T
+	SHARED := -shared -Wl,--version-script=link.T -Wl,--no-undefined
 	CC = /opt/xydds/usr/bin/arm-linux-gcc
 	AR = /opt/xydds/usr/bin/arm-linux-ar
-	CFLAGS += -fomit-frame-pointer -ffast-math -marm -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -march=armv7-a
+	CFLAGS += -fomit-frame-pointer -ffast-math -marm -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard
+	ifeq ($(shell echo `$(CC) -dumpversion` "< 4.9" | bc -l), 1)
+	  CFLAGS += -march=armv7-a
+	else
+	  CFLAGS += -march=armv7ve
+	  # If gcc is 5.0 or later
+	  ifeq ($(shell echo `$(CC) -dumpversion` ">= 5" | bc -l), 1)
+	    LDFLAGS += -static-libgcc -static-libstdc++
+	  endif
+	endif
 
 # RETROFW
 else ifeq ($(platform), retrofw)
