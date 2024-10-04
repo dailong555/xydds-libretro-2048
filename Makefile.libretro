@@ -349,7 +349,7 @@ else ifeq ($(platform), xydds)
 	SHARED := -shared -Wl,-version-script=link.T
 	CC = /opt/xydds/usr/bin/arm-linux-gcc
 	AR = /opt/xydds/usr/bin/arm-linux-ar
-	CFLAGS += -fomit-frame-pointer -ffast-math -marm -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard
+	CFLAGS += -fomit-frame-pointer -ffast-math -marm -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard -march=armv7-a
 
 # RETROFW
 else ifeq ($(platform), retrofw)
